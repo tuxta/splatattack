@@ -5,8 +5,8 @@ from Objects import PlayButton
 
 
 class FinalScore(Level):
-    def __init__(self, screen):
-        Level.__init__(self, screen)
+    def __init__(self, screen, joysticks):
+        Level.__init__(self, screen, joysticks)
 
         self.set_background_image('ladybug_background.png')
 

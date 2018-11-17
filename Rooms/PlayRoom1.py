@@ -4,8 +4,8 @@ from GameFrame import Globals
 
 
 class PlayRoom1(Level):
-    def __init__(self, screen):
-        Level.__init__(self, screen)
+    def __init__(self, screen, joysticks):
+        Level.__init__(self, screen, joysticks)
 
         self.set_background_image('floorboards.png')
         self.splat_sound = self.load_sound('Splat.wav')
