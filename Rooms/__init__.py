@@ -4,3 +4,5 @@ from Rooms.PlayRoom3 import PlayRoom3
 from Rooms.Score import Score
 from Rooms.FinalScore import FinalScore
 from Rooms.Title import Title
+from Rooms.HighScores import HighScores
+from Rooms.EnterName import EnterName

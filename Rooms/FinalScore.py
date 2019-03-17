@@ -14,4 +14,3 @@ class FinalScore(Level):
         self.add_room_object(TextObject(self, 250, 250, str(Globals.SCORE)))
         self.add_room_object(PlayButton(self, 200, 350))
 
-        Globals.SCORE = 0
