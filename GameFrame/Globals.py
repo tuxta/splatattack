@@ -16,8 +16,7 @@ class Globals:
     window_name = 'Splat Attack'
 
     # - Set the order of the rooms - #
-    # levels = ["Title", "EnterName", "PlayRoom1", "Score", "PlayRoom2", "Score", "PlayRoom3", "FinalScore", "HighScores"]
-    levels = ["Title", "EnterName", "PlayRoom1", "Score", "FinalScore", "HighScores"]
+    levels = ["Title", "EnterName", "PlayRoom1", "Score", "PlayRoom2", "Score", "PlayRoom3", "FinalScore", "HighScores"]
 
     # - Set the starting level - #
     start_level = 0

@@ -18,7 +18,6 @@ class NameText(TextObject):
 
             key_recognised = False
             if key[pygame.K_a]:
-                print('Got A')
                 self.text += 'A'
                 key_recognised = True
             elif key[pygame.K_b]:
@@ -95,13 +94,43 @@ class NameText(TextObject):
                 key_recognised = True
             elif key[pygame.K_z]:
                 self.text += 'Z'
+                key_recognised = True
             elif key[pygame.K_SPACE]:
                 self.text += ' '
+                key_recognised = True
+            elif key[pygame.K_1]:
+                self.text += '1'
+                key_recognised = True
+            elif key[pygame.K_2]:
+                self.text += '2'
+                key_recognised = True
+            elif key[pygame.K_3]:
+                self.text += '3'
+                key_recognised = True
+            elif key[pygame.K_4]:
+                self.text += '4'
+                key_recognised = True
+            elif key[pygame.K_5]:
+                self.text += '5'
+                key_recognised = True
+            elif key[pygame.K_6]:
+                self.text += '6'
+                key_recognised = True
+            elif key[pygame.K_7]:
+                self.text += '7'
+                key_recognised = True
+            elif key[pygame.K_8]:
+                self.text += '8'
+                key_recognised = True
+            elif key[pygame.K_9]:
+                self.text += '9'
+                key_recognised = True
+            elif key[pygame.K_0]:
+                self.text += '0'
                 key_recognised = True
             elif key[pygame.K_BACKSPACE]:
                 if len(self.text) > 0:
                     self.text = self.text[:-1]
-                    print(len(self.text))
                     if len(self.text) == 0:
                         self.room.invalid_name()
                     key_recognised = True
@@ -110,7 +139,7 @@ class NameText(TextObject):
                 if len(self.text) > 0:
                     self.room.valid_name()
 
-                if len(self.text) > 16:
+                if len(self.text) > 8:
                     self.text = self.text[:-1]
                 self.update_text()
                 Globals.player_name = self.text
