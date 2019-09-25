@@ -1,20 +1,23 @@
-from GameFrame import TextObject, Globals
 import pygame
+from GameFrame import TextObject, Globals, Level
 
 
-class NameText(TextObject):
-    def __init__(self, room, x, y):
+class EntryTextObject(TextObject):
+    def __init__(self, room: Level, x: int, y: int, max_len=4):
         TextObject.__init__(self, room, x, y, '')
-
+        self.max_len = max_len
         self.handle_key_events = True
-
         self.accepting_input = True
+        self.active = True
 
     def accept_input(self):
         self.accepting_input = True
 
+    def set_focus(self, in_focus: bool):
+        self.active = in_focus
+
     def key_pressed(self, key):
-        if self.accepting_input:
+        if self.accepting_input and self.active:
 
             key_recognised = False
             if key[pygame.K_a]:
@@ -131,15 +134,10 @@ class NameText(TextObject):
             elif key[pygame.K_BACKSPACE]:
                 if len(self.text) > 0:
                     self.text = self.text[:-1]
-                    if len(self.text) == 0:
-                        self.room.invalid_name()
                     key_recognised = True
 
             if key_recognised:
-                if len(self.text) > 0:
-                    self.room.valid_name()
-
-                if len(self.text) > 8:
+                if len(self.text) > self.max_len:
                     self.text = self.text[:-1]
                 self.update_text()
                 Globals.player_name = self.text
