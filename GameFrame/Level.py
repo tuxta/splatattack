@@ -57,13 +57,18 @@ class Level:
 
     def run(self) -> bool:
         self.running = True
-        for obj in self.objects:
+        screen = self.screen
+        objects = self.objects
+        keyboard_objects = self.keyboard_objects
+        mouse_objects = self.mouse_objects
+
+        for obj in objects:
             self.init_collision_list(obj)
 
         while self.running:
             self._clock.tick(Globals.FRAMES_PER_SECOND)
 
-            for obj in self.objects:
+            for obj in objects:
                 obj.prev_x = obj.x
                 obj.prev_y = obj.y
 
@@ -109,28 +114,28 @@ class Level:
                         signals = True
 
             if signals:
-                for obj in self.keyboard_objects:
+                for obj in keyboard_objects:
                     obj.joy_pad_signal(self.p1_btns, self.p2_btns)
 
             # - Check for a keyboard event and pass - #
             # - to objects registered for key events - #
             keys = pygame.key.get_pressed()
             if len(keys):
-                for obj in self.keyboard_objects:
+                for obj in keyboard_objects:
                     obj.key_pressed(keys)
 
             # - Check for a mouse event and pass - #
             # - to objects registered for mouse events - #
             (mouse_x, mouse_y) = pygame.mouse.get_pos()
             (button_left, button_middle, button_right) = pygame.mouse.get_pressed()
-            for obj in self.mouse_objects:
-                    obj.mouse_event(mouse_x, mouse_y, button_left, button_middle, button_right)
+            for obj in mouse_objects:
+                obj.mouse_event(mouse_x, mouse_y, button_left, button_middle, button_right)
 
             # - Handle all other events - #
             self.catch_events(events)
 
             # - Clear the screen - #
-            self.screen.fill((0, 0, 0))
+            screen.fill((0, 0, 0))
             # - Add Background if set - #
             if self.background_set:
                 # - Scrolling if set - #
@@ -138,21 +143,21 @@ class Level:
                     self.background_y += self.background_scroll_speed
                     if self.background_y >= Globals.SCREEN_HEIGHT:
                         self.background_y = 0
-                    self.screen.blit(self.background_image, (0, self.background_y))
-                    self.screen.blit(self.background_image, (0, self.background_y - 600))
+                    screen.blit(self.background_image, (0, self.background_y))
+                    screen.blit(self.background_image, (0, self.background_y - 600))
                 else:
-                    self.screen.blit(self.background_image, (0, 0))
+                    screen.blit(self.background_image, (0, 0))
             # Call Update on all objects
-            for item in self.objects:
+            for item in objects:
                 item.update()
                 item.step()
 
             # Check collisions
-            for item in self.objects:
+            for item in objects:
                 item.check_collisions()
 
-            for item in self.objects:
-                self.screen.blit(item.image, (item.x, item.y))
+            for item in objects:
+                screen.blit(item.image, (item.x, item.y))
 
             pygame.display.update()
 
